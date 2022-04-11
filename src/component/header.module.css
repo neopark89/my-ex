@@ -1,0 +1,10 @@
+.title {
+  font-size: 2em;
+  
+}
+
+.nav {
+  display: flex;
+  justify-content:space-around
+
+}

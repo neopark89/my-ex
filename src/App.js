@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './component/Header';
+import Attend from './my-ex/useReducer/Attend';
+import Deposit from './my-ex/useReducer/Deposit';
+import Toggle from './my-ex/useEffect/Toggle';
+import TodoTemplate from './my-ex/todo/TodoTemplate';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path='/todo' element={<TodoTemplate />} />
+        <Route path='/deposit' element={<Deposit />} />
+        <Route path='/attend' element={<Attend />} />
+        <Route path='/timer' element={<Toggle />} />
+      </Routes>
+    </BrowserRouter>
+  )
+
 }
 
 export default App;
+
