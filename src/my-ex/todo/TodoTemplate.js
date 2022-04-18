@@ -4,7 +4,10 @@ import styles from './todoTemplate.module.css';
 import { MdAddCircle } from 'react-icons/md';
 import TodoInsert from './TodoInsert';
 
+const nextId = 4;
+
 function TodoTemplate() {
+  const [insertToggle, setInsertToggle] = useState(false);
   const [todos, setTodos] = useState([
     {
       id: 1,
@@ -22,20 +25,33 @@ function TodoTemplate() {
       checked: false
     }
   ]);
-  const [insertToggle, setInsertToggle] = useState(false);
-  const onInsetToggle = () => {
-    // setInsertToggle(!insertToggle)
+  const onInsertToggle = () => {
+    // setInsertToggle(!insertToggle);
     setInsertToggle(prev => !prev);
+  }
+
+  const onInsertTodo = (text) => {
+    if (text === '') {
+      return alert('할 일을 입력해주세요.')
+    } else {
+      const todo = {
+        id: nextId,
+        text,
+        checked: false
+      }
+      setTodos(todos => todos.concat(todo));
+      nextId++;
+    }
   }
 
   return (
     <div className={styles.template}>
       <div className={styles.title}>오늘의 할일({todos.length})</div>
       <TodoList todos={todos} />
-      <div className={styles.addbtn} onClick={onInsetToggle} >
+      <div className={styles.addbtn} onClick={onInsertToggle} >
         <MdAddCircle />
       </div>
-      {insertToggle && <TodoInsert onClick={onInsetToggle} />}
+      {insertToggle && <TodoInsert onInsertToggle={onInsertToggle} onInsertTodo={onInsertTodo} />}
     </div>
   )
 }
